@@ -14,7 +14,8 @@ namespace Community.PowerToys.Run.Plugin.Timestamp
 
         public static string GetNowTimeStamp()
         {
-            TimeSpan ts = DateTime.Now - TimeZoneInfo.ConvertTimeFromUtc(UnixTimeBegin, TimeZoneInfo.Local);
+            TimeZoneInfo PstZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+            TimeSpan ts = TimeZoneInfo.ConvertTime(DateTime.UtcNow, PstZone) - UnixTimeBegin;
             return Convert.ToInt64(ts.TotalSeconds).ToString();
         }
 
